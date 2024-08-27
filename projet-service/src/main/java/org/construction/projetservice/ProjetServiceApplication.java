@@ -17,7 +17,7 @@ public class ProjetServiceApplication {
         SpringApplication.run(ProjetServiceApplication.class, args);
 
     }
-@Bean
+
     CommandLineRunner commandLineRunner(ProjetRepository projetRepository){
         return args -> {
             List<Projet> projetList=List.of(
