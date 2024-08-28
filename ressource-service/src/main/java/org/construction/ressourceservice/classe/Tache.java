@@ -14,10 +14,9 @@ import java.time.LocalDate;
 public class Tache {
 
     private Integer id;
-    private String name;
+    private String description;
     private LocalDate dateCreation;
-    @Enumerated(EnumType.STRING)
+    private LocalDate dateFin;
     private EStatus status;
     private Integer projetId;
-
 }

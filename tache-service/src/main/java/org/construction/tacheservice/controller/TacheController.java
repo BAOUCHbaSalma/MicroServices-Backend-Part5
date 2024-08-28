@@ -38,4 +38,9 @@ public class TacheController {
 
     }
 
+    @GetMapping("/taches/find/{id}")
+    public Tache findById(@PathVariable Integer id){
+        return tacheService.findById(id);
+    }
+
 }

@@ -1,7 +1,10 @@
 package org.construction.ressourceservice.service;
 
+import org.construction.ressourceservice.classe.Tache;
 import org.construction.ressourceservice.model.Ressource;
 import org.construction.ressourceservice.repository.RessourceRepository;
+
+import org.construction.ressourceservice.tache.TacheRest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +16,36 @@ public class RessourceService {
     @Autowired
     private RessourceRepository ressourceRepository;
 
+    @Autowired
+    private TacheRest tacheRest;
+
+
+
 
     public Ressource addRessource(Ressource ressource){
         return ressourceRepository.save(ressource);
     }
 
     public List<Ressource> showAll(){
-        return ressourceRepository.findAll();
+
+        List<Ressource> ressourceList= ressourceRepository.findAll();
+        for (Ressource ressource:ressourceList){
+            Tache tache=tacheRest.findById(ressource.getTacheId());
+            ressource.setTache(tache);
+
+        }
+        return ressourceList;
     }
 
     public List<Ressource> findRessourceTache(Integer id){
-        return ressourceRepository.findAllByTacheId(id);
+        List<Ressource> ressourceList= ressourceRepository.findAllByTacheId(id);
+        Tache tache=tacheRest.findById(id);
+
+        for (Ressource ressource:ressourceList){
+            ressource.setTache(tache);
+
+        }
+        return ressourceList;
     }
 
     public Ressource findById(Integer id){
@@ -44,5 +66,9 @@ public class RessourceService {
         Ressource ressource=findById(idRessource);
         ressource.setTacheId(idTache);
         return ressourceRepository.save(ressource);
+    }
+
+    public void deleteRessource(Integer id){
+        ressourceRepository.deleteById(id);
     }
 }
