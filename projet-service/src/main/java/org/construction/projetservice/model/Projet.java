@@ -23,5 +23,9 @@ public class Projet {
     private String description;
     @Column
     private LocalDate dateCreation;
+    @Column
+    private LocalDate dateFin;
+    @Column
+    private Integer budget;
 
 }

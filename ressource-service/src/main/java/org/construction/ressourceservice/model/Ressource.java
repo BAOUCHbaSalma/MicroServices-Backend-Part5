@@ -19,7 +19,11 @@ public class Ressource {
     @Column
     private String name;
     @Column
+    private Integer quantity;
+    @Column
     private String picture;
+    @Column
+    private String infoFornisseur;
     @Transient
     private Tache tache;
     @Column

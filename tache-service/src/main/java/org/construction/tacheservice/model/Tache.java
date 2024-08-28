@@ -17,9 +17,11 @@ public class Tache {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
-    private String name;
+    private String description;
     @Column
     private LocalDate dateCreation;
+    @Column
+    private LocalDate dateFin;
     @Enumerated(EnumType.STRING)
     private EStatus status;
     @Transient
