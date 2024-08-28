@@ -32,6 +32,10 @@ public class TacheController {
         tacheService.deleteTache(id);
     }
 
-    
+    @PutMapping("taches/{id}")
+    public Tache updateTache(@PathVariable Integer id,@RequestBody Tache tache){
+        return tacheService.updateTache(id,tache);
+
+    }
 
 }

@@ -1,12 +1,14 @@
 package org.construction.tacheservice.service;
 
 import org.construction.tacheservice.classe.Projet;
+import org.construction.tacheservice.model.EStatus;
 import org.construction.tacheservice.model.Tache;
 import org.construction.tacheservice.projet.ProjetRest;
 import org.construction.tacheservice.repository.TacheRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -19,18 +21,23 @@ public class TacheService {
 
     public Tache addTache(Integer id,Tache tache){
         tache.setProjetId(id);
-        Projet projet=projetRest.findById(id);
-        tache.setProjet(projet);
+        tache.setDateCreation(LocalDate.now());
+        tache.setStatus(EStatus.A_FAIRE);
         return tacheRepository.save(tache);
     }
 
     public Tache findById(Integer id){
+
         return tacheRepository.findById(id).orElseThrow();
     }
 
     public List<Tache> showTaches(Integer id){
-
-        return tacheRepository.findAllByProjetId(id);
+        List<Tache> tacheList=tacheRepository.findAllByProjetId(id);
+        Projet projet=projetRest.findById(id);
+        for (Tache tache:tacheList){
+            tache.setProjet(projet);
+        }
+        return tacheList;
 
     }
 

@@ -34,4 +34,9 @@ public class ProjetController {
     public Projet updateProjet(@PathVariable Integer id,@RequestBody Projet projet){
         return projetService.updateProjet(id,projet);
     }
+
+    @GetMapping("/projets/{id}")
+    public Projet findById(@PathVariable Integer id){
+        return projetService.findById(id);
+    }
 }
