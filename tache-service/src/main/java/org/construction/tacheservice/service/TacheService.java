@@ -38,5 +38,14 @@ public class TacheService {
         tacheRepository.deleteById(id);
     }
 
-    
+    public Tache updateTache(Integer id,Tache tache){
+        Tache tache1=tacheRepository.findById(id).orElseThrow();
+        tache1.setDateFin(tache.getDateFin());
+        tache1.setStatus(tache.getStatus());
+        tache1.setDescription(tache.getDescription());
+        return tacheRepository.save(tache);
+
+    }
+
+
 }
