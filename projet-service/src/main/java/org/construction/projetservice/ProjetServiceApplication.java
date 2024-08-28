@@ -18,22 +18,22 @@ public class ProjetServiceApplication {
 
     }
 
-    CommandLineRunner commandLineRunner(ProjetRepository projetRepository){
-        return args -> {
-            List<Projet> projetList=List.of(
-                    Projet.builder()
-                            .name("Construction ecole privee")
-                            .dateCreation(LocalDate.now())
-                            .description("lllllllllllllll")
-                            .build(),
-                    Projet.builder()
-                            .name("Construction ecole primaire")
-                            .dateCreation(LocalDate.now())
-                            .description("llllllmmmmmmmmmlllll")
-                            .build()
-
-            );
-            projetRepository.saveAll(projetList);
-        };
-}
+//    CommandLineRunner commandLineRunner(ProjetRepository projetRepository){
+//        return args -> {
+//            List<Projet> projetList=List.of(
+//                    Projet.builder()
+//                            .name("Construction ecole privee")
+//                            .dateCreation(LocalDate.now())
+//                            .description("lllllllllllllll")
+//                            .build(),
+//                    Projet.builder()
+//                            .name("Construction ecole primaire")
+//                            .dateCreation(LocalDate.now())
+//                            .description("llllllmmmmmmmmmlllll")
+//                            .build()
+//
+//            );
+//            projetRepository.saveAll(projetList);
+//        };
+//}
 }
