@@ -15,7 +15,7 @@ public class ProjetController {
     private ProjetService projetService;
 
 
-    @GetMapping("/projects")
+    @GetMapping("/projets")
     public List<Projet> findAll(){
         return projetService.showProjet();
     }
