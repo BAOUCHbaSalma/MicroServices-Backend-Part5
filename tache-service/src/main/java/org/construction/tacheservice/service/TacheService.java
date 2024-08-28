@@ -50,7 +50,7 @@ public class TacheService {
         tache1.setDateFin(tache.getDateFin());
         tache1.setStatus(tache.getStatus());
         tache1.setDescription(tache.getDescription());
-        return tacheRepository.save(tache);
+        return tacheRepository.save(tache1);
 
     }
 
