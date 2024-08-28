@@ -29,10 +29,12 @@ public class RessourceService {
     public List<Ressource> showAll(){
 
         List<Ressource> ressourceList= ressourceRepository.findAll();
+
         for (Ressource ressource:ressourceList){
+            if (ressource.getTacheId()!=null){
             Tache tache=tacheRest.findById(ressource.getTacheId());
             ressource.setTache(tache);
-
+            }
         }
         return ressourceList;
     }
