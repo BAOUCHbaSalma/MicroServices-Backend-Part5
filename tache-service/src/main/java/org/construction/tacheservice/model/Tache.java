@@ -18,15 +18,15 @@ public class Tache {
     private Integer id;
     @Column
     private String description;
-    @Column
+    @Column(name = "date_creation")
     private LocalDate dateCreation;
-    @Column
+    @Column(name = "date_fin")
     private LocalDate dateFin;
     @Enumerated(EnumType.STRING)
     private EStatus status;
     @Transient
     private Projet projet;
-    @Column
+    @Column(name = "projet_id")
     private Integer projetId;
 
 }

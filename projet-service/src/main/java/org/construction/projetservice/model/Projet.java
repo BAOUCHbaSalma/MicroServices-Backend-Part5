@@ -21,9 +21,9 @@ public class Projet {
     private String name;
     @Column
     private String description;
-    @Column
+    @Column(name = "date_creation")
     private LocalDate dateCreation;
-    @Column
+    @Column(name = "date_fin")
     private LocalDate dateFin;
     @Column
     private Integer budget;

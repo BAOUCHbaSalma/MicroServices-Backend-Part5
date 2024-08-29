@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/projet-service/src/main/resources/db/migration/V1__Create_projet_table.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/projet-service/src/main/resources/db/migration/V2__rename_dateCreation_to_date_creation.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/projet-service/src/main/resources/db/migration/V3__rename_dateFin_to_date_fin.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/ressource-service/src/main/resources/db/migration/V1__Create_Ressource_Table.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/tache-service/src/main/resources/db/migration/V1__Create_Tache_Table.sql" dialect="GenericSQL" />
+  </component>
+</project>
