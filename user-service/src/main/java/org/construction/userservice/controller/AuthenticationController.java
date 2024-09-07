@@ -39,6 +39,16 @@ public class AuthenticationController {
         return ;
     }
 
+    @PostMapping("/signup")
+    public Person register(@RequestBody Person person ) {
+        if (person.getRole()==Erole.CUSTOMER){
+            person.set
+            return
+        }
+
+        return ;
+    }
+
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDto loginRequestDto) {
