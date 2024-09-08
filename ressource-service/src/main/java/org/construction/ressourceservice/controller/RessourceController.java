@@ -26,24 +26,24 @@ public class RessourceController {
         return ressourceService.findRessourceTache(id);
     }
 
-    @PostMapping("/ressources")
+    @PostMapping("admin/ressources")
     public Ressource addRessource(@RequestBody Ressource ressource){
 
         return ressourceService.addRessource(ressource);
 
     }
 
-    @DeleteMapping("/ressources/{id}")
+    @DeleteMapping("admin/ressources/{id}")
     public void deleteRessource(@PathVariable Integer id){
         ressourceService.deleteRessource(id);
     }
 
-    @PutMapping("/ressources/{id}")
+    @PutMapping("admin/ressources/{id}")
     public Ressource updateRessource(@PathVariable Integer id,@RequestBody Ressource ressource){
         return ressourceService.updateRessource(id,ressource);
     }
 
-    @PutMapping("/ressources/associate/{idr}")
+    @PutMapping("admin/ressources/associate/{idr}")
     public Ressource associate(@PathVariable Integer idr, @RequestBody AssociateRessourceDTO dto) {
         return ressourceService.associate(dto.getIdTache(), idr);
     }

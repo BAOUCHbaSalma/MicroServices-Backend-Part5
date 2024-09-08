@@ -25,13 +25,7 @@ public class SecurityConfig  {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(expressionInterceptUrlRegistry ->
                                 expressionInterceptUrlRegistry
-
-                                        .requestMatchers("/login").permitAll()
-//                                .requestMatchers("/failure").hasAnyRole("USER","ADMIN")
-//                                .requestMatchers("/admin/**").hasRole("ADMIN")
-//                                .requestMatchers("/user/**").hasRole("USER")
-//                                .requestMatchers("/technician/**").hasRole("TECHNICIAN")
-//                                .requestMatchers("/findtickets/**").hasAnyRole("USER","ADMIN")
+                                        .requestMatchers("admin/**").hasRole("ADMIN")
                                         .anyRequest().authenticated()
 
                 )

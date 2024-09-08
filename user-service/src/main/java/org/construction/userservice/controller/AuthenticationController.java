@@ -2,8 +2,11 @@ package org.construction.userservice.controller;
 
 import org.construction.userservice.dto.LoginRequestDto;
 import org.construction.userservice.enums.Erole;
+import org.construction.userservice.model.Customer;
 import org.construction.userservice.model.Person;
 import org.construction.userservice.security.JwtAuth;
+import org.construction.userservice.service.AdminService;
+import org.construction.userservice.service.CustomerService;
 import org.construction.userservice.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,25 +32,12 @@ public class AuthenticationController {
 
 
 
-    @PostMapping("/signup")
-    public Person register(@RequestBody Person person ) {
-      if (person.getRole()==Erole.CUSTOMER){
-          person.set
-          return
-      }
-
-        return ;
-    }
 
     @PostMapping("/signup")
     public Person register(@RequestBody Person person ) {
-        if (person.getRole()==Erole.CUSTOMER){
-            person.set
-            return
-        }
-
-        return ;
+     return personService.addPerson(person);
     }
+
 
 
     @PostMapping("/login")

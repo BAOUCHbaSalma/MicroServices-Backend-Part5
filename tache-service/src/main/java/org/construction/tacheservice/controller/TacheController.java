@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+
 public class TacheController {
 
 
@@ -22,23 +23,23 @@ public class TacheController {
         return tacheService.showTaches(id);
     }
 
-    @PostMapping("/taches/{id}")
+    @PostMapping("admin/taches/{id}")
     public Tache addTache(@PathVariable Integer id, @RequestBody Tache tache){
         return tacheService.addTache(id,tache);
     }
 
-    @DeleteMapping("taches/{id}")
+    @DeleteMapping("admin/taches/{id}")
     public void deleteTache(@PathVariable Integer id){
         tacheService.deleteTache(id);
     }
 
-    @PutMapping("taches/{id}")
+    @PutMapping("admin/taches/{id}")
     public Tache updateTache(@PathVariable Integer id,@RequestBody Tache tache){
         return tacheService.updateTache(id,tache);
 
     }
 
-    @GetMapping("/taches/find/{id}")
+    @GetMapping("admin/taches/find/{id}")
     public Tache findById(@PathVariable Integer id){
         return tacheService.findById(id);
     }

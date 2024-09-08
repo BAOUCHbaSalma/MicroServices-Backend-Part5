@@ -20,22 +20,22 @@ public class ProjetController {
         return projetService.showProjet();
     }
 
-    @PostMapping("/projets")
+    @PostMapping("admin/projets")
     public Projet addProjet(@RequestBody Projet projet){
         return projetService.addProjet(projet);
     }
 
-    @DeleteMapping("/projets/{id}")
+    @DeleteMapping("admin/projets/{id}")
     public void deleteProjet(@PathVariable Integer id){
         projetService.deleteProjet(id);
     }
 
-    @PutMapping("/projets/{id}")
+    @PutMapping("admin/projets/{id}")
     public Projet updateProjet(@PathVariable Integer id,@RequestBody Projet projet){
         return projetService.updateProjet(id,projet);
     }
 
-    @GetMapping("/projets/{id}")
+    @GetMapping("admin/projets/{id}")
     public Projet findById(@PathVariable Integer id){
         return projetService.findById(id);
     }
