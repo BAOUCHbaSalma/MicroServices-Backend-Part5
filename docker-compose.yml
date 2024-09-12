@@ -1,54 +1,147 @@
+version: "3.8"
 services:
-  my-discovery-service:
+  eureka-server:
     build:
-      ./discovery-service
-    container_name: discovery-service
+      context: ./discovery-service
     ports:
-      - '8761:8761'
-    expose:
-      - '8761'
+      - "8761:8761"
+    environment:
+      - SPRING_SECURITY_USER_NAME=admin
+      - SPRING_SECURITY_USER_PASSWORD=admin
+    networks:
+      - microservices-net
 
-  my-gateway-service:
-    build:
-      ./gateway-service
-    container_name: gateway-service
-    ports:
-      - '8888:8888'
-    expose:
-      - '8888'
 
-  my-projet-service:
+  gateway-service:
     build:
-      ./projet-service
-    container_name: projet-service
+      context: ./gateway-service
     ports:
-      - '8080:8080'
-    expose:
-      - '8080'
+      - "8888:8888"
+    depends_on:
+      - eureka-server
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://admin:admin@eureka-server:8761/eureka/
+    networks:
+      - microservices-net
 
-  my-ressource-service:
-    build:
-      ./ressource-service
-    container_name: ressource-service
-    ports:
-      - '8082:8082'
-    expose:
-      - '8082'
 
-  my-tache-service:
+  projet-service:
     build:
-      ./tache-service
-    container_name: tache-service
+      context: ./projet-service
     ports:
-      - '8081:8081'
-    expose:
-      - '8081'
+      - "8080:8080"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://admin:admin@eureka-server:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://projetdb:3306/projetConstruction
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    depends_on:
+      - eureka-server
+      - projetdb
+    networks:
+      - microservices-net
 
-  my-user-service:
+
+  ressource-service:
     build:
-      ./user-service
-    container_name: user-service
+      context: ./ressource-service
     ports:
-      - '8087:8087'
-    expose:
-      - '8087'
+      - "8082:8082"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://admin:admin@eureka-server:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://ressourcedb:3306/ressourceConstruction
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    depends_on:
+      - eureka-server
+      - ressourcedb
+    networks:
+      - microservices-net
+
+
+  tache-service:
+    build:
+      context: ./tache-service
+    ports:
+      - "8081:8081"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://admin:admin@eureka-server:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://tachedb:3306/tacheConstruction
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    depends_on:
+      - eureka-server
+      - tachedb
+    networks:
+      - microservices-net
+
+  # User Service
+  user-service:
+    build:
+      context: ./user-service
+    ports:
+      - "8087:8087"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://admin:admin@eureka-server:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://userdb:3306/userConstruction
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    depends_on:
+      - eureka-server
+      - userdb
+    networks:
+      - microservices-net
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  # Bases de données pour chaque service
+  projetdb:
+    image: "mysql:latest"
+    restart: always
+    environment:
+      MYSQL_DATABASE: projetConstruction
+    volumes:
+      - projet-db:/var/lib/mysql
+    networks:
+      - microservices-net
+
+  ressourcedb:
+    image: "mysql:latest"
+    restart: always
+    environment:
+      MYSQL_DATABASE: ressourceConstruction
+    volumes:
+      - ressource-db:/var/lib/mysql
+    networks:
+      - microservices-net
+
+  tachedb:
+    image: "mysql:latest"
+    restart: always
+    environment:
+      MYSQL_DATABASE: tacheConstruction
+    volumes:
+      - tache-db:/var/lib/mysql
+    networks:
+      - microservices-net
+
+  userdb:
+    image: "mysql:latest"
+    restart: always
+    environment:
+      MYSQL_DATABASE: userConstruction
+    volumes:
+      - user-db:/var/lib/mysql
+    networks:
+      - microservices-net
+
+volumes:
+  projet-db:
+  ressource-db:
+  tache-db:
+  user-db:
+
+networks:
+  microservices-net:
+    driver: bridge

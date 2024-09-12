@@ -46,5 +46,8 @@ public class PersonService {
         }
         return person;
     }
+    public Integer findIdByUsername(String username){
+        return personRepository.findIdByUsername(username);
+    }
 
 }
