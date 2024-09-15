@@ -3,10 +3,8 @@ package org.construction.ressourceservice.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
-public class AssociateRessourceDTO {
+@Getter
+public class AssociateDto {
     private Integer idTache;
-
-
 }

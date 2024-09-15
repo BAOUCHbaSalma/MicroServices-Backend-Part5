@@ -1,6 +1,7 @@
 package org.construction.tacheservice.service;
 
 import org.construction.tacheservice.classe.Projet;
+import org.construction.tacheservice.dto.AssociateDto;
 import org.construction.tacheservice.model.EStatus;
 import org.construction.tacheservice.model.Tache;
 import org.construction.tacheservice.projet.ProjetRest;
@@ -32,12 +33,7 @@ public class TacheService {
     }
 
     public List<Tache> showTaches(Integer id){
-        List<Tache> tacheList=tacheRepository.findAllByProjetId(id);
-        Projet projet=projetRest.findById(id);
-        for (Tache tache:tacheList){
-            tache.setProjet(projet);
-        }
-        return tacheList;
+        return  tacheRepository.findAllByProjetId(id);
 
     }
 

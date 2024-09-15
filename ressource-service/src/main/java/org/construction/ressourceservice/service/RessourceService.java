@@ -1,6 +1,7 @@
 package org.construction.ressourceservice.service;
 
 import org.construction.ressourceservice.classe.Tache;
+import org.construction.ressourceservice.dto.AssociateDto;
 import org.construction.ressourceservice.model.Ressource;
 import org.construction.ressourceservice.repository.RessourceRepository;
 
@@ -27,27 +28,11 @@ public class RessourceService {
     }
 
     public List<Ressource> showAll(){
-
-        List<Ressource> ressourceList= ressourceRepository.findAll();
-
-        for (Ressource ressource:ressourceList){
-            if (ressource.getTacheId()!=null){
-            Tache tache=tacheRest.findById(ressource.getTacheId());
-            ressource.setTache(tache);
-            }
-        }
-        return ressourceList;
+        return ressourceRepository.findAll();
     }
 
     public List<Ressource> findRessourceTache(Integer id){
-        List<Ressource> ressourceList= ressourceRepository.findAllByTacheId(id);
-        Tache tache=tacheRest.findById(id);
-
-        for (Ressource ressource:ressourceList){
-            ressource.setTache(tache);
-
-        }
-        return ressourceList;
+        return ressourceRepository.findAllByTacheId(id);
     }
 
     public Ressource findById(Integer id){
@@ -64,13 +49,19 @@ public class RessourceService {
 
     }
 
-    public Ressource associate(Integer idTache,Integer idRessource){
-        Ressource ressource=findById(idRessource);
-        ressource.setTacheId(idTache);
-        return ressourceRepository.save(ressource);
-    }
+//    public void assignTache(Integer idRessource, Integer idTache) {
+//        Ressource ressource = ressourceRepository.findById(idRessource).orElseThrow();
+//        ressource.setTacheId(idTache);
+//         ressourceRepository.save(ressource);
+//    }
 
     public void deleteRessource(Integer id){
         ressourceRepository.deleteById(id);
+    }
+
+    public Ressource Associate(Integer idr, Integer idT){
+        Ressource ressource=findById(idr);
+        ressource.setTacheId(idT);
+        return ressourceRepository.save(ressource);
     }
 }

@@ -1,7 +1,6 @@
 package org.construction.ressourceservice.controller;
 
-import jakarta.ws.rs.Path;
-import org.construction.ressourceservice.dto.AssociateRessourceDTO;
+import org.construction.ressourceservice.dto.AssociateDto;
 import org.construction.ressourceservice.model.Ressource;
 import org.construction.ressourceservice.service.RessourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +15,12 @@ public class RessourceController {
     private RessourceService ressourceService;
 
 
-    @GetMapping("/ressources")
+    @GetMapping("ressources")
     public List<Ressource> showAll(){
         return ressourceService.showAll();
     }
 
-    @GetMapping("/ressources/{id}")
+    @GetMapping("ressources/{id}")
     public List<Ressource> findRessourceTache(@PathVariable Integer id){
         return ressourceService.findRessourceTache(id);
     }
@@ -43,9 +42,16 @@ public class RessourceController {
         return ressourceService.updateRessource(id,ressource);
     }
 
-    @PutMapping("admin/ressources/associate/{idr}")
-    public Ressource associate(@PathVariable Integer idr, @RequestBody AssociateRessourceDTO dto) {
-        return ressourceService.associate(dto.getIdTache(), idr);
+    @GetMapping("admin/find/{id}")
+    public Ressource findById(@PathVariable Integer id){
+        return ressourceService.findById(id);
     }
+
+    @PutMapping("admin/associate/{idr}")
+    public Ressource Associate(@PathVariable Integer idr, @RequestBody AssociateDto dto){
+        return ressourceService.Associate(idr,dto.getIdTache());
+    }
+
+
 
 }

@@ -1,6 +1,7 @@
 package org.construction.tacheservice.controller;
 
 import org.construction.tacheservice.classe.Projet;
+import org.construction.tacheservice.dto.AssociateDto;
 import org.construction.tacheservice.model.Tache;
 import org.construction.tacheservice.projet.ProjetRest;
 import org.construction.tacheservice.repository.TacheRepository;
@@ -43,5 +44,8 @@ public class TacheController {
     public Tache findById(@PathVariable Integer id){
         return tacheService.findById(id);
     }
+
+
+
 
 }
