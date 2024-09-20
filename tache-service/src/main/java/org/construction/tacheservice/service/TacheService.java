@@ -49,6 +49,9 @@ public class TacheService {
         return tacheRepository.save(tache1);
 
     }
+   public void deleteByIdProjet(Integer id){
+        tacheRepository.deleteAllByProjetId(id);
+    }
 
 
 }

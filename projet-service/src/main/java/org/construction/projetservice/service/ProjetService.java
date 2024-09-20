@@ -1,6 +1,7 @@
 package org.construction.projetservice.service;
 
 import org.construction.projetservice.model.Projet;
+import org.construction.projetservice.model.TaskClinet;
 import org.construction.projetservice.repository.ProjetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ public class ProjetService {
 
     @Autowired
     private ProjetRepository projetRepository;
+    @Autowired
+    private TaskClinet taskClinet;
 
 
     public Projet addProjet(Projet projet){
@@ -30,7 +33,9 @@ public class ProjetService {
 
 
     public void deleteProjet(Integer id){
+
         projetRepository.deleteById(id);
+        taskClinet.deleteTache(id);
     }
 
     public Projet updateProjet(Integer id,Projet projet){

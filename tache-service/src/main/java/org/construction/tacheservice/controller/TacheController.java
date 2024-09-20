@@ -45,6 +45,11 @@ public class TacheController {
         return tacheService.findById(id);
     }
 
+    @DeleteMapping("admin/delete/p/{id}")
+    void deleteByIdProjet(@PathVariable Integer id){
+        tacheService.deleteByIdProjet(id);
+    }
+
 
 
 
