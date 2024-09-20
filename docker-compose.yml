@@ -1,8 +1,7 @@
 version: "3.8"
 services:
   eureka-server:
-    build:
-      context: ./discovery-service
+    image: salmaba/eureka-service:latest
     ports:
       - "8761:8761"
     environment:
@@ -13,8 +12,7 @@ services:
 
 
   gateway-service:
-    build:
-      context: ./gateway-service
+    image: salmaba/gateway-service:latest
     ports:
       - "8888:8888"
     depends_on:
@@ -26,8 +24,7 @@ services:
 
 
   projet-service:
-    build:
-      context: ./projet-service
+    image: salmaba/projet-service:latest
     ports:
       - "8080:8080"
     environment:
@@ -43,8 +40,7 @@ services:
 
 
   ressource-service:
-    build:
-      context: ./ressource-service
+    image: salmaba/ressource-service:latest
     ports:
       - "8082:8082"
     environment:
@@ -60,8 +56,7 @@ services:
 
 
   tache-service:
-    build:
-      context: ./tache-service
+    image: salmaba/tache-service:latest
     ports:
       - "8081:8081"
     environment:
@@ -77,8 +72,7 @@ services:
 
   # User Service
   user-service:
-    build:
-      context: ./user-service
+    image: salmaba/user-service:latest
     ports:
       - "8087:8087"
     environment:
