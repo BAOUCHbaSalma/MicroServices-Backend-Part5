@@ -126,7 +126,7 @@ pipeline {
                     steps {
                         dir('user-service') {
                             script {
-                                def dockerImage = docker.build("salmaba/user-service:${env.BUILD_ID}")
+                                def dockerImage = docker.build("salmaba/user-service:${env.TAG_VERSION ?: 'latest'}")
                                 docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
                                     dockerImage.push()
                                 }
@@ -144,7 +144,7 @@ pipeline {
                     steps {
                         dir('projet-service') {
                             script {
-                                def dockerImage = docker.build("salmaba/projet-service:${env.BUILD_ID}")
+                                def dockerImage = docker.build("salmaba/projet-service:${env.TAG_VERSION ?: 'latest'}")
                                 docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
                                     dockerImage.push()
                                 }
@@ -162,7 +162,7 @@ pipeline {
                     steps {
                         dir('tache-service') {
                             script {
-                                def dockerImage = docker.build("salmaba/tache-service:${env.BUILD_ID}")
+                                def dockerImage = docker.build("salmaba/tache-service:${env.TAG_VERSION ?: 'latest'}")
                                 docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
                                     dockerImage.push()
                                 }
@@ -180,7 +180,7 @@ pipeline {
                     steps {
                         dir('ressource-service') {
                             script {
-                                def dockerImage = docker.build("salmaba/ressource-service:${env.BUILD_ID}")
+                                def dockerImage = docker.build("salmaba/ressource-service:${env.TAG_VERSION ?: 'latest'}")
                                 docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
                                     dockerImage.push()
                                 }
@@ -198,7 +198,7 @@ pipeline {
                     steps {
                         dir('gateway-service') {
                             script {
-                                def dockerImage = docker.build("salmaba/gateway-service:${env.BUILD_ID}")
+                                def dockerImage = docker.build("salmaba/gateway-service:${env.TAG_VERSION ?: 'latest'}")
                                 docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
                                     dockerImage.push()
                                 }
@@ -216,7 +216,7 @@ pipeline {
                     steps {
                         dir('eureka-service') {
                             script {
-                                def dockerImage = docker.build("salmaba/eureka-service:${env.BUILD_ID}")
+                                def dockerImage = docker.build("salmaba/eureka-service:${env.TAG_VERSION ?: 'latest'}")
                                 docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
                                     dockerImage.push()
                                 }
