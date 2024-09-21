@@ -16,15 +16,13 @@ pipeline {
         stage('Detect Changes') {
             steps {
                 script {
+                    def userChanged = bat(script: "git diff --name-only HEAD~1 | findstr ^user-service/", returnStatus: true) == 0
+                    def projetChanged = bat(script: "git diff --name-only HEAD~1 | findstr ^projet-service/", returnStatus: true) == 0
+                    def tacheChanged = bat(script: "git diff --name-only HEAD~1 | findstr ^tache-service/", returnStatus: true) == 0
+                    def ressourceChanged = bat(script: "git diff --name-only HEAD~1 | findstr ^ressource-service/", returnStatus: true) == 0
+                    def gatewayChanged = bat(script: "git diff --name-only HEAD~1 | findstr ^gateway-service/", returnStatus: true) == 0
+                    def eurekaChanged = bat(script: "git diff --name-only HEAD~1 | findstr ^eureka-service/", returnStatus: true) == 0
 
-                    def userChanged = sh(script: "git diff --name-only HEAD~1 | grep ^user-service/", returnStatus: true) == 0
-                    def projetChanged = sh(script: "git diff --name-only HEAD~1 | grep ^projet-service/", returnStatus: true) == 0
-                    def tacheChanged = sh(script: "git diff --name-only HEAD~1 | grep ^tache-service/", returnStatus: true) == 0
-                    def ressourceChanged = sh(script: "git diff --name-only HEAD~1 | grep ^ressource-service/", returnStatus: true) == 0
-                    def gatewayChanged = sh(script: "git diff --name-only HEAD~1 | grep ^gateway-service/", returnStatus: true) == 0
-                    def eurekaChanged = sh(script: "git diff --name-only HEAD~1 | grep ^eureka-service/", returnStatus: true) == 0
-
-                    // Affichage des changements détectés
                     if (userChanged) echo "Changements détectés dans user-service"
                     if (projetChanged) echo "Changements détectés dans projet-service"
                     if (tacheChanged) echo "Changements détectés dans tache-service"
@@ -40,12 +38,12 @@ pipeline {
                 stage('Build & Test user-service') {
                     when {
                         expression {
-                            return sh(script: "git diff --name-only HEAD~1 | grep ^user-service/", returnStatus: true) == 0
+                            return bat(script: "git diff --name-only HEAD~1 | findstr ^user-service/", returnStatus: true) == 0
                         }
                     }
                     steps {
                         dir('user-service') {
-                            sh 'mvn clean test'
+                            bat 'mvn clean test'
                         }
                     }
                 }
@@ -53,12 +51,12 @@ pipeline {
                 stage('Build & Test projet-service') {
                     when {
                         expression {
-                            return sh(script: "git diff --name-only HEAD~1 | grep ^projet-service/", returnStatus: true) == 0
+                            return bat(script: "git diff --name-only HEAD~1 | findstr ^projet-service/", returnStatus: true) == 0
                         }
                     }
                     steps {
                         dir('projet-service') {
-                            sh 'mvn clean test'
+                            bat 'mvn clean test'
                         }
                     }
                 }
@@ -66,12 +64,12 @@ pipeline {
                 stage('Build & Test tache-service') {
                     when {
                         expression {
-                            return sh(script: "git diff --name-only HEAD~1 | grep ^tache-service/", returnStatus: true) == 0
+                            return bat(script: "git diff --name-only HEAD~1 | findstr ^tache-service/", returnStatus: true) == 0
                         }
                     }
                     steps {
                         dir('tache-service') {
-                            sh 'mvn clean test'
+                            bat 'mvn clean test'
                         }
                     }
                 }
@@ -79,12 +77,12 @@ pipeline {
                 stage('Build & Test ressource-service') {
                     when {
                         expression {
-                            return sh(script: "git diff --name-only HEAD~1 | grep ^ressource-service/", returnStatus: true) == 0
+                            return bat(script: "git diff --name-only HEAD~1 | findstr ^ressource-service/", returnStatus: true) == 0
                         }
                     }
                     steps {
                         dir('ressource-service') {
-                            sh 'mvn clean test'
+                            bat 'mvn clean test'
                         }
                     }
                 }
@@ -92,12 +90,12 @@ pipeline {
                 stage('Build & Package gateway-service') {
                     when {
                         expression {
-                            return sh(script: "git diff --name-only HEAD~1 | grep ^gateway-service/", returnStatus: true) == 0
+                            return bat(script: "git diff --name-only HEAD~1 | findstr ^gateway-service/", returnStatus: true) == 0
                         }
                     }
                     steps {
                         dir('gateway-service') {
-                            sh 'mvn clean install'
+                            bat 'mvn clean install'
                         }
                     }
                 }
@@ -105,12 +103,12 @@ pipeline {
                 stage('Build & Test eureka-service') {
                     when {
                         expression {
-                            return sh(script: "git diff --name-only HEAD~1 | grep ^eureka-service/", returnStatus: true) == 0
+                            return bat(script: "git diff --name-only HEAD~1 | findstr ^eureka-service/", returnStatus: true) == 0
                         }
                     }
                     steps {
                         dir('eureka-service') {
-                            sh 'mvn clean install'
+                            bat 'mvn clean install'
                         }
                     }
                 }
@@ -122,7 +120,7 @@ pipeline {
                 stage('Build Docker & Push for user-service') {
                     when {
                         expression {
-                            return sh(script: "git diff --name-only HEAD~1 | grep ^user-service/", returnStatus: true) == 0
+                            return bat(script: "git diff --name-only HEAD~1 | findstr ^user-service/", returnStatus: true) == 0
                         }
                     }
                     steps {
@@ -140,7 +138,7 @@ pipeline {
                 stage('Build Docker & Push for projet-service') {
                     when {
                         expression {
-                            return sh(script: "git diff --name-only HEAD~1 | grep ^projet-service/", returnStatus: true) == 0
+                            return bat(script: "git diff --name-only HEAD~1 | findstr ^projet-service/", returnStatus: true) == 0
                         }
                     }
                     steps {
@@ -158,7 +156,7 @@ pipeline {
                 stage('Build Docker & Push for tache-service') {
                     when {
                         expression {
-                            return sh(script: "git diff --name-only HEAD~1 | grep ^tache-service/", returnStatus: true) == 0
+                            return bat(script: "git diff --name-only HEAD~1 | findstr ^tache-service/", returnStatus: true) == 0
                         }
                     }
                     steps {
@@ -176,7 +174,7 @@ pipeline {
                 stage('Build Docker & Push for ressource-service') {
                     when {
                         expression {
-                            return sh(script: "git diff --name-only HEAD~1 | grep ^ressource-service/", returnStatus: true) == 0
+                            return bat(script: "git diff --name-only HEAD~1 | findstr ^ressource-service/", returnStatus: true) == 0
                         }
                     }
                     steps {
@@ -194,7 +192,7 @@ pipeline {
                 stage('Build Docker & Push for gateway-service') {
                     when {
                         expression {
-                            return sh(script: "git diff --name-only HEAD~1 | grep ^gateway-service/", returnStatus: true) == 0
+                            return bat(script: "git diff --name-only HEAD~1 | findstr ^gateway-service/", returnStatus: true) == 0
                         }
                     }
                     steps {
@@ -212,7 +210,7 @@ pipeline {
                 stage('Build Docker & Push for eureka-service') {
                     when {
                         expression {
-                            return sh(script: "git diff --name-only HEAD~1 | grep ^eureka-service/", returnStatus: true) == 0
+                            return bat(script: "git diff --name-only HEAD~1 | findstr ^eureka-service/", returnStatus: true) == 0
                         }
                     }
                     steps {
@@ -231,8 +229,8 @@ pipeline {
 
         stage('Deploy with Docker Compose') {
             steps {
-                sh 'docker-compose pull'
-                sh 'docker-compose up -d'
+                bat 'docker-compose pull'
+                bat 'docker-compose up -d'
             }
         }
     }
