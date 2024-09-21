@@ -16,7 +16,7 @@ pipeline {
         stage('Detect Changes') {
             steps {
                 script {
-                    // Vérification des changements dans chaque service
+
                     def userChanged = sh(script: "git diff --name-only HEAD~1 | grep ^user-service/", returnStatus: true) == 0
                     def projetChanged = sh(script: "git diff --name-only HEAD~1 | grep ^projet-service/", returnStatus: true) == 0
                     def tacheChanged = sh(script: "git diff --name-only HEAD~1 | grep ^tache-service/", returnStatus: true) == 0
@@ -231,8 +231,8 @@ pipeline {
 
         stage('Deploy with Docker Compose') {
             steps {
-                sh 'docker-compose pull'  // Récupère les dernières images depuis Docker Hub
-                sh 'docker-compose up -d' // Déploie les conteneurs en arrière-plan
+                sh 'docker-compose pull'  
+                sh 'docker-compose up -d'
             }
         }
     }
