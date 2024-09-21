@@ -11,8 +11,8 @@ public class CrosConfiguration {
     @Bean
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.addAllowedOrigin("http://localhost:4200"); // Permet uniquement localhost:4200
-        corsConfig.addAllowedMethod("*"); // Autorise toutes les méthodes (GET, POST, PUT, etc.)
+        corsConfig.addAllowedOrigin("http://localhost:4200"); // testPermet uniquement localhost:4200
+        corsConfig.addAllowedMethod("*"); // Autorise toutes les méthtetsfgfdghgkghjqgyudeodes (GET, POST, PUT, etc.)
         corsConfig.addAllowedHeader("*"); // Autorise tous les headers
         corsConfig.setAllowCredentials(true); // Permet l'envoi de credentials (si nécessaire)
 
