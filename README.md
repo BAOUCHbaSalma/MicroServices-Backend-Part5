@@ -11,9 +11,7 @@
 6. [CI/CD Pipeline](#cicd-pipeline)
 7. [SonarQube Analysis](#sonarqube-analysis)
 8. [Docker Images](#docker-images)
-9. [Contributing](#contributing)
-10. [License](#license)
-11. [Contact](#contact)
+
 
 ## Project Overview
 ConstructionXpert Services is a modern project management system designed for the construction industry. This repository contains the microservices architecture that powers our platform, along with CI/CD pipeline configurations for automated testing, quality assurance, and deployment.
