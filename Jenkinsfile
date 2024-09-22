@@ -89,32 +89,32 @@ pipeline {
 
                     // Analyse pour user-service
                     dir('user-service') {
-                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='user-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
+                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='user-service' -Dsonar.sources='.' -Dsonar.host.url='http://localhost:9000' -Dsonar.login='squ_5374c50602e37c662976b7f8d2f0869689e7d45b'"
                     }
 
                     // Analyse pour projet-service
                     dir('projet-service') {
-                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='projet-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
+                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='projet-service' -Dsonar.sources='.' -Dsonar.host.url='http://localhost:9000' -Dsonar.login='squ_5374c50602e37c662976b7f8d2f0869689e7d45b'"
                     }
 
                     // Analyse pour tache-service
                     dir('tache-service') {
-                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='tache-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
+                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='tache-service' -Dsonar.sources='.' -Dsonar.host.url='http://localhost:9000' -Dsonar.login='squ_5374c50602e37c662976b7f8d2f0869689e7d45b'"
                     }
 
                     // Analyse pour ressource-service
                     dir('ressource-service') {
-                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='ressource-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
+                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='ressource-service' -Dsonar.sources='.' -Dsonar.host.url='http://localhost:9000' -Dsonar.login='squ_5374c50602e37c662976b7f8d2f0869689e7d45b'"
                     }
 
                     // Analyse pour gateway-service
                     dir('gateway-service') {
-                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='gateway-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
+                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='gateway-service' -Dsonar.sources='.' -Dsonar.host.url='http://localhost:9000' -Dsonar.login='squ_5374c50602e37c662976b7f8d2f0869689e7d45b'"
                     }
 
                     // Analyse pour discovery-service
                     dir('discovery-service') {
-                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='discovery-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
+                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='discovery-service' -Dsonar.sources='.' -Dsonar.host.url='http://localhost:9000' -Dsonar.login='squ_5374c50602e37c662976b7f8d2f0869689e7d45b'"
                     }
                 }
             }
