@@ -63,7 +63,7 @@ pipeline {
                     steps {
                         dir('gateway-service') {
                             withMaven(maven: 'mvn') {
-                                bat 'mvn clean install'
+                                bat 'mvn clean package'
                             }
                         }
                     }
@@ -73,7 +73,7 @@ pipeline {
                     steps {
                         dir('eureka-service') {
                             withMaven(maven: 'mvn') {
-                                bat 'mvn clean install'
+                                bat 'mvn clean package'
                             }
                         }
                     }
