@@ -6,7 +6,7 @@
         <groupId>org.construction</groupId>
         <artifactId>ConstructionXpert</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>ressource-service</artifactId>
     <packaging>jar</packaging>
