@@ -16,7 +16,7 @@ services:
     ports:
       - "8888:8888"
     depends_on:
-      - eureka-server
+      - discovery-service
     environment:
       - eureka.client.serviceUrl.defaultZone=http://admin:admin@eureka-server:8761/eureka/
     networks:
@@ -33,7 +33,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=
     depends_on:
-      - eureka-server
+      - discovery-service
       - projetdb
     networks:
       - microservices-net
@@ -49,7 +49,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=
     depends_on:
-      - eureka-server
+      - discovery-service
       - ressourcedb
     networks:
       - microservices-net
@@ -65,7 +65,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=
     depends_on:
-      - eureka-server
+      - discovery-service
       - tachedb
     networks:
       - microservices-net
@@ -81,7 +81,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=
     depends_on:
-      - eureka-server
+      - discovery-service
       - userdb
     networks:
       - microservices-net
