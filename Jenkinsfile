@@ -89,32 +89,32 @@ pipeline {
 
                     // Analyse pour user-service
                     dir('user-service') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='user-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
+                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='user-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
                     }
 
                     // Analyse pour projet-service
                     dir('projet-service') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='projet-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
+                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='projet-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
                     }
 
                     // Analyse pour tache-service
                     dir('tache-service') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='tache-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
+                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='tache-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
                     }
 
                     // Analyse pour ressource-service
                     dir('ressource-service') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='ressource-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
+                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='ressource-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
                     }
 
                     // Analyse pour gateway-service
                     dir('gateway-service') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='gateway-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
+                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='gateway-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
                     }
 
                     // Analyse pour discovery-service
                     dir('discovery-service') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='discovery-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
+                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='discovery-service' -Dsonar.sources='.' -Dsonar.host.url='${SONARQUBE_SERVER}' -Dsonar.login='${SONARQUBE_TOKEN}'"
                     }
                 }
             }
