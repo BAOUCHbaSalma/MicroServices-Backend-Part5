@@ -69,9 +69,9 @@ pipeline {
                     }
                 }
 
-                stage('Build & Test eureka-service') {
+                stage('Build & Test discovery-service') {
                     steps {
-                        dir('eureka-service') {
+                        dir('discovery-service') {
                             withMaven(maven: 'mvn') {
                                 bat 'mvn clean package'
                             }
@@ -148,11 +148,11 @@ pipeline {
                     }
                 }
 
-                stage('Build Docker & Push for eureka-service') {
+                stage('Build Docker & Push for discovery-service') {
                     steps {
-                        dir('eureka-service') {
+                        dir('discovery-service') {
                             script {
-                                def dockerImage = docker.build("salmaba/eureka-service:${env.TAG_VERSION ?: 'latest'}")
+                                def dockerImage = docker.build("salmaba/discovery-service:${env.TAG_VERSION ?: 'latest'}")
                                 docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
                                     dockerImage.push()
                                 }
