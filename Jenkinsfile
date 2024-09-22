@@ -2,12 +2,12 @@ pipeline {
     agent any
 
     tools {
-        maven 'mvn'  // Utilisez l'outil Maven configuré dans Jenkins
+        maven 'mvn'
     }
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials')
-        SONARQUBE_SERVER = 'sonarqube'
+        SONARQUBE_SERVER = 'SonarQube'
     }
 
     stages {
@@ -75,6 +75,35 @@ pipeline {
                             withMaven(maven: 'mvn') {
                                 bat 'mvn clean package'
                             }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def scannerHome = tool 'SonarQubeScanner'
+                    withSonarQubeEnv(SONARQUBE_SERVER) {
+
+                        dir('user-service') {
+                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=user-service -Dsonar.sources=."
+                        }
+                        dir('projet-service') {
+                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=projet-service -Dsonar.sources=."
+                        }
+                        dir('tache-service') {
+                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=tache-service -Dsonar.sources=."
+                        }
+                        dir('ressource-service') {
+                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ressource-service -Dsonar.sources=."
+                        }
+                        dir('gateway-service') {
+                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=gateway-service -Dsonar.sources=."
+                        }
+                        dir('discovery-service') {
+                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=discovery-service -Dsonar.sources=."
                         }
                     }
                 }
