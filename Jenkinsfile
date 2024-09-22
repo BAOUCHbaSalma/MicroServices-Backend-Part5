@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'mvn'  // Use the Maven tool configured in Jenkins
+        maven 'mvn'  // Utilisez l'outil Maven configuré dans Jenkins
     }
 
     environment {
@@ -88,7 +88,7 @@ pipeline {
                         dir('user-service') {
                             script {
                                 def dockerImage = docker.build("salmaba/user-service:${env.TAG_VERSION ?: 'latest'}")
-                                docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+                                docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
                                     dockerImage.push()
                                 }
                             }
@@ -101,7 +101,7 @@ pipeline {
                         dir('projet-service') {
                             script {
                                 def dockerImage = docker.build("salmaba/projet-service:${env.TAG_VERSION ?: 'latest'}")
-                                docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+                                docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
                                     dockerImage.push()
                                 }
                             }
@@ -114,7 +114,7 @@ pipeline {
                         dir('tache-service') {
                             script {
                                 def dockerImage = docker.build("salmaba/tache-service:${env.TAG_VERSION ?: 'latest'}")
-                                docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+                                docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
                                     dockerImage.push()
                                 }
                             }
@@ -127,7 +127,7 @@ pipeline {
                         dir('ressource-service') {
                             script {
                                 def dockerImage = docker.build("salmaba/ressource-service:${env.TAG_VERSION ?: 'latest'}")
-                                docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+                                docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
                                     dockerImage.push()
                                 }
                             }
@@ -140,7 +140,7 @@ pipeline {
                         dir('gateway-service') {
                             script {
                                 def dockerImage = docker.build("salmaba/gateway-service:${env.TAG_VERSION ?: 'latest'}")
-                                docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+                                docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
                                     dockerImage.push()
                                 }
                             }
@@ -153,7 +153,7 @@ pipeline {
                         dir('discovery-service') {
                             script {
                                 def dockerImage = docker.build("salmaba/discovery-service:${env.TAG_VERSION ?: 'latest'}")
-                                docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+                                docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
                                     dockerImage.push()
                                 }
                             }
