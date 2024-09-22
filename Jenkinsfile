@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'mvn'  // Use the Maven tool configured in Jenkins
+    }
+
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials')
         SONARQUBE_SERVER = 'sonarqube'
@@ -18,7 +22,9 @@ pipeline {
                 stage('Build & Test user-service') {
                     steps {
                         dir('user-service') {
-                            bat 'mvn clean package'
+                            withMaven(maven: 'mvn') {
+                                bat 'mvn clean package'
+                            }
                         }
                     }
                 }
@@ -26,7 +32,9 @@ pipeline {
                 stage('Build & Test projet-service') {
                     steps {
                         dir('projet-service') {
-                            bat 'mvn clean package'
+                            withMaven(maven: 'mvn') {
+                                bat 'mvn clean package'
+                            }
                         }
                     }
                 }
@@ -34,7 +42,9 @@ pipeline {
                 stage('Build & Test tache-service') {
                     steps {
                         dir('tache-service') {
-                            bat 'mvn clean package'
+                            withMaven(maven: 'mvn') {
+                                bat 'mvn clean package'
+                            }
                         }
                     }
                 }
@@ -42,7 +52,9 @@ pipeline {
                 stage('Build & Test ressource-service') {
                     steps {
                         dir('ressource-service') {
-                            bat 'mvn clean package'
+                            withMaven(maven: 'mvn') {
+                                bat 'mvn clean package'
+                            }
                         }
                     }
                 }
@@ -50,7 +62,9 @@ pipeline {
                 stage('Build & Package gateway-service') {
                     steps {
                         dir('gateway-service') {
-                            bat 'mvn clean install'
+                            withMaven(maven: 'mvn') {
+                                bat 'mvn clean install'
+                            }
                         }
                     }
                 }
@@ -58,7 +72,9 @@ pipeline {
                 stage('Build & Test eureka-service') {
                     steps {
                         dir('eureka-service') {
-                            bat 'mvn clean install'
+                            withMaven(maven: 'mvn') {
+                                bat 'mvn clean install'
+                            }
                         }
                     }
                 }
