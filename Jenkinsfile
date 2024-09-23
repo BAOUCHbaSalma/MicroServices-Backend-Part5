@@ -87,32 +87,32 @@ pipeline {
                 script {
                     def scannerHome = tool 'SonarQubeScanner'
 
-                    // Analyse pour user-service
+
                     dir('user-service') {
                         bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=user-service -Dsonar.sources=. -Dsonar.host.url=${SONARQUBE_SERVER} -Dsonar.login=${SONARQUBE_TOKEN} -Dsonar.java.binaries=target/classes"
                     }
 
-                    // Analyse pour projet-service
+
                     dir('projet-service') {
                         bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=projet-service -Dsonar.sources=. -Dsonar.host.url=${SONARQUBE_SERVER} -Dsonar.login=${SONARQUBE_TOKEN} -Dsonar.java.binaries=target/classes"
                     }
 
-                    // Analyse pour tache-service
+
                     dir('tache-service') {
                         bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=tache-service -Dsonar.sources=. -Dsonar.host.url=${SONARQUBE_SERVER} -Dsonar.login=${SONARQUBE_TOKEN} -Dsonar.java.binaries=target/classes"
                     }
 
-                    // Analyse pour ressource-service
+
                     dir('ressource-service') {
                         bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ressource-service -Dsonar.sources=. -Dsonar.host.url=${SONARQUBE_SERVER} -Dsonar.login=${SONARQUBE_TOKEN} -Dsonar.java.binaries=target/classes"
                     }
 
-                    // Analyse pour gateway-service
+
                     dir('gateway-service') {
                         bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=gateway-service -Dsonar.sources=. -Dsonar.host.url=${SONARQUBE_SERVER} -Dsonar.login=${SONARQUBE_TOKEN} -Dsonar.java.binaries=target/classes"
                     }
 
-                    // Analyse pour discovery-service
+
                     dir('discovery-service') {
                         bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=discovery-service -Dsonar.sources=. -Dsonar.host.url=${SONARQUBE_SERVER} -Dsonar.login=${SONARQUBE_TOKEN} -Dsonar.java.binaries=target/classes"
                     }
