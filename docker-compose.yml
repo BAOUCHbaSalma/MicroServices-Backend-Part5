@@ -95,6 +95,7 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: projetConstruction
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - projet-db:/var/lib/mysql
     networks:
@@ -105,6 +106,7 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: ressourceConstruction
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - ressource-db:/var/lib/mysql
     networks:
@@ -115,6 +117,7 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: tacheConstruction
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - tache-db:/var/lib/mysql
     networks:
@@ -125,6 +128,7 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: userConstruction
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - user-db:/var/lib/mysql
     networks:
