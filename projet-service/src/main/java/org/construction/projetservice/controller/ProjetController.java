@@ -33,7 +33,7 @@ public class ProjetController {
     @PutMapping("admin/projets/{id}")
     public Projet updateProjet(@PathVariable Integer id,@RequestBody Projet projet){
         return projetService.updateProjet(id,projet);
-    }//lllll
+    }
     @GetMapping("admin/projets/{id}")
     public Projet findById(@PathVariable Integer id){
         return projetService.findById(id);
