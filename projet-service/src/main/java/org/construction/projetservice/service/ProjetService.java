@@ -4,6 +4,10 @@ import org.construction.projetservice.model.Projet;
 import org.construction.projetservice.model.TaskClinet;
 import org.construction.projetservice.repository.ProjetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,9 +27,18 @@ public class ProjetService {
         return projetRepository.save(projet);
 
     }
-    public List<Projet> showProjet(){
-        return projetRepository.findAll();
+//    public List<Projet> showProjet(){
+//        return projetRepository.findAll();
+//    }
+public Page<Projet> showProjet(Integer page, Integer size, String sort) {
+    Sort sortOrder = Sort.unsorted();
+    if (sort != null && !sort.isEmpty()) {
+        String[] sortParams = sort.split(",");
+        sortOrder = Sort.by(Sort.Direction.fromString(sortParams[1]), sortParams[0]);
     }
+    return projetRepository.findAll(PageRequest.of(page, size, sortOrder));
+}
+
 
     public Projet findById(Integer id){
         return projetRepository.findById(id).orElseThrow();
