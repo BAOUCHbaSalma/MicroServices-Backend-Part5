@@ -2,7 +2,8 @@ spring:
   application:
     name: projet-service
   datasource:
-    url: jdbc:mysql://projetdb:3306/projetConstruction?createDatabaseIfNotExist=True
+    #url: jdbc:mysql://projetdb:3306/projetConstruction?createDatabaseIfNotExist=True
+    url: jdbc:mysql://localhost:3306/projetConstruction?createDatabaseIfNotExist=True
     username: root
     password:
   jpa:
