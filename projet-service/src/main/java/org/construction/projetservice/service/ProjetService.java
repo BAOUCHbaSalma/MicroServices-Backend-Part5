@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -30,14 +31,36 @@ public class ProjetService {
 //    public List<Projet> showProjet(){
 //        return projetRepository.findAll();
 //    }
-public Page<Projet> showProjet(Integer page, Integer size, String sort) {
-    Sort sortOrder = Sort.unsorted();
-    if (sort != null && !sort.isEmpty()) {
-        String[] sortParams = sort.split(",");
-        sortOrder = Sort.by(Sort.Direction.fromString(sortParams[1]), sortParams[0]);
+
+    public Page<Projet> showProjet(Integer page, Integer size, String sort, String name, Double minBudget, Double maxBudget, String startDate, String endDate) {
+        Sort sortOrder = Sort.unsorted();
+        if (sort != null && !sort.isEmpty()) {
+            String[] sortParams = sort.split(",");
+            sortOrder = Sort.by(Sort.Direction.fromString(sortParams[1]), sortParams[0]);
+        }
+
+        // Utiliser une specification pour le filtrage
+        Specification<Projet> spec = Specification.where(null);
+
+        if (name != null && !name.isEmpty()) {
+            spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("name"), "%" + name + "%"));
+        }
+        if (minBudget != null) {
+            spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get("budget"), minBudget));
+        }
+        if (maxBudget != null) {
+            spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get("budget"), maxBudget));
+        }
+        if (startDate != null && !startDate.isEmpty()) {
+            spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get("dateCreation"), LocalDate.parse(startDate)));
+        }
+        if (endDate != null && !endDate.isEmpty()) {
+            spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get("dateCreation"), LocalDate.parse(endDate)));
+        }
+
+        Pageable pageable = PageRequest.of(page, size, sortOrder);
+        return projetRepository.findAll(spec, pageable);
     }
-    return projetRepository.findAll(PageRequest.of(page, size, sortOrder));
-}
 
 
     public Projet findById(Integer id){
