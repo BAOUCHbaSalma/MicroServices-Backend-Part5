@@ -24,11 +24,22 @@ public class ProjetController {
 //    public List<Projet> findAll(){
 //       return projetService.showProjet();
 //    }
-    @GetMapping("/projets")
-    public Page<Projet> findAll(@RequestParam Integer size,@RequestParam Integer page, @RequestParam(required = false) String sort){
-        return projetService.showProjet(page,size,sort );
-    }
 
+
+    @GetMapping("/projets")
+    public Page<Projet> findAll(
+            @RequestParam Integer size,
+            @RequestParam Integer page,
+            @RequestParam(required = false) String sort,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Double minBudget,
+            @RequestParam(required = false) Double maxBudget,
+            @RequestParam(required = false) String startDate,
+            @RequestParam(required = false) String endDate) {
+
+        // Passer les paramètres de filtre au service
+        return projetService.showProjet(page, size, sort, name, minBudget, maxBudget, startDate, endDate);
+    }
     @PostMapping("admin/projets")
     public Projet addProjet(@RequestBody Projet projet){
         return projetService.addProjet(projet);

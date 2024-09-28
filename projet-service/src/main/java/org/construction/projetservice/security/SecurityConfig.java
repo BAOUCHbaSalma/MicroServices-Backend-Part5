@@ -23,7 +23,10 @@ public class SecurityConfig  {
                 .authorizeHttpRequests(expressionInterceptUrlRegistry ->
                                 expressionInterceptUrlRegistry
                                         .requestMatchers("admin/**").hasRole("ADMIN")
-                                        .anyRequest().authenticated()
+
+                                        .anyRequest().permitAll()
+
+
 
                 )
                 .formLogin(formLogin ->formLogin.disable());
