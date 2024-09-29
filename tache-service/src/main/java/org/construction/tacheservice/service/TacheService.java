@@ -36,11 +36,14 @@ public class TacheService {
         return tacheRepository.findById(id).orElseThrow();
     }
 
-    public Page<Tache> showTaches(Integer id, Integer size, Integer page , String sort){
+    public Page<Tache> showTaches(Integer id, Integer size, Integer page , String sort,String description){
         Sort sortOrder = Sort.unsorted();
         if (sort != null && !sort.isEmpty()) {
             String[] sortParams = sort.split(",");
             sortOrder = Sort.by(Sort.Direction.fromString(sortParams[1]), sortParams[0]);
+        }
+        if (description != null && !description.isEmpty()) {
+            return tacheRepository.findAllByProjetIdAndDescriptionContainingIgnoreCase(id, description);
         }
         Pageable pageable = PageRequest.of(page, size, sortOrder);
         return  tacheRepository.findAllByProjetId(id,pageable);
@@ -63,5 +66,11 @@ public class TacheService {
         tacheRepository.deleteAllByProjetId(id);
     }
 
+//    public List<Tache> showTachesWithFilter(Integer projetId, String description) {
+//        if (description != null && !description.isEmpty()) {
+//            return tacheRepository.findAllByProjetIdAndDescriptionContainingIgnoreCase(projetId, description);
+//        }
+//        return tacheRepository.findAllByProjetId(projetId);
+//    }
 
 }

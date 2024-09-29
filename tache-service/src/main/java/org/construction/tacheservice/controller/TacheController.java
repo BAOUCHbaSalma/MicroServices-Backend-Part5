@@ -21,11 +21,17 @@ public class TacheController {
     private TacheService tacheService;
 
     @GetMapping("/taches/{id}")
+
     public Page<Tache> showTaches(@PathVariable Integer id, @RequestParam Integer size,
                                   @RequestParam Integer page,
-                                  @RequestParam(required = false) String sort){
-        return tacheService.showTaches(id,size,page,sort);
+                                  @RequestParam(required = false) String sort,@RequestParam(required = false) String description){
+        return tacheService.showTaches(id,size,page,sort,description);
+
     }
+//    @GetMapping("/taches/{id}")
+//    public List<Tache> showTaches(@PathVariable Integer id){
+//        return tacheService.showTaches(id);
+//    }
 
     @PostMapping("admin/taches/{id}")
     public Tache addTache(@PathVariable Integer id, @RequestBody Tache tache){
