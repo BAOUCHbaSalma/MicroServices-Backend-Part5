@@ -7,6 +7,10 @@ import org.construction.ressourceservice.repository.RessourceRepository;
 
 import org.construction.ressourceservice.tache.TacheRest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +31,16 @@ public class RessourceService {
         return ressourceRepository.save(ressource);
     }
 
-    public List<Ressource> showAll(){
+    public Page<Ressource> showAll(Integer size ,Integer page,String sort){
+        Sort sortOrder = Sort.unsorted();
+        if (sort != null && !sort.isEmpty()) {
+            String[] sortParams = sort.split(",");
+            sortOrder = Sort.by(Sort.Direction.fromString(sortParams[1]), sortParams[0]);
+        }
+        Pageable pageable = PageRequest.of(page, size, sortOrder);
+        return ressourceRepository.findAll(pageable);
+    }
+    public List<Ressource> allRessources(){
         return ressourceRepository.findAll();
     }
 

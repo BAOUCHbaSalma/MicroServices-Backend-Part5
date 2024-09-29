@@ -4,6 +4,7 @@ import org.construction.ressourceservice.dto.AssociateDto;
 import org.construction.ressourceservice.model.Ressource;
 import org.construction.ressourceservice.service.RessourceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,9 +16,17 @@ public class RessourceController {
     private RessourceService ressourceService;
 
 
+    @GetMapping("resces")
+    public List<Ressource> AllRessources(){
+        return  ressourceService.allRessources();
+    }
+
+
     @GetMapping("ressources")
-    public List<Ressource> showAll(){
-        return ressourceService.showAll();
+    public Page<Ressource> showAll(@RequestParam Integer size,
+                                   @RequestParam Integer page,
+                                   @RequestParam(required = false) String sort){
+        return ressourceService.showAll(size,page,sort);
     }
 
     @GetMapping("ressources/{id}")
