@@ -63,8 +63,8 @@ public class RessourceController {
     }
 
     @GetMapping("ressources/status/{status}")
-    public List<Ressource> findRessourcesByStatus(@PathVariable EStatus status) {
-        return ressourceService.findByStatus(status);
+    public List<Ressource> findRessourcesByStatus(@PathVariable String name) {
+        return ressourceService.findByStatus(name);
     }
 
 

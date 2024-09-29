@@ -10,5 +10,5 @@ import java.util.List;
 public interface RessourceRepository extends JpaRepository<Ressource,Integer> {
 
     List<Ressource> findAllByTacheId(Integer id);
-    List<Ressource> findAllByStatus(EStatus status);
+    List<Ressource> findAllByName(String name);
 }

@@ -78,7 +78,7 @@ public class RessourceService {
         ressource.setTacheId(idT);
         return ressourceRepository.save(ressource);
     }
-    public List<Ressource> findByStatus(EStatus status) {
-        return ressourceRepository.findAllByStatus(status);
+    public List<Ressource> findByStatus(String name) {
+        return ressourceRepository.findAllByName(name);
     }
 }
