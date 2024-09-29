@@ -53,5 +53,11 @@ public class TacheService {
         tacheRepository.deleteAllByProjetId(id);
     }
 
+    public List<Tache> showTachesWithFilter(Integer projetId, String description) {
+        if (description != null && !description.isEmpty()) {
+            return tacheRepository.findAllByProjetIdAndDescriptionContainingIgnoreCase(projetId, description);
+        }
+        return tacheRepository.findAllByProjetId(projetId);
+    }
 
 }

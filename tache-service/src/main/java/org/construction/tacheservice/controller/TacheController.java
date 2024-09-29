@@ -20,9 +20,13 @@ public class TacheController {
     private TacheService tacheService;
 
     @GetMapping("/taches/{id}")
-    public List<Tache> showTaches(@PathVariable Integer id){
-        return tacheService.showTaches(id);
+    public List<Tache> showTaches(@PathVariable Integer id, @RequestParam(required = false) String description) {
+        return tacheService.showTachesWithFilter(id, description);
     }
+//    @GetMapping("/taches/{id}")
+//    public List<Tache> showTaches(@PathVariable Integer id){
+//        return tacheService.showTaches(id);
+//    }
 
     @PostMapping("admin/taches/{id}")
     public Tache addTache(@PathVariable Integer id, @RequestBody Tache tache){

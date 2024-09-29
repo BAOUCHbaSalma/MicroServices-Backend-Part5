@@ -9,4 +9,5 @@ import java.util.List;
 public interface TacheRepository extends JpaRepository<Tache,Integer> {
     List<Tache> findAllByProjetId(Integer id);
     void deleteAllByProjetId(Integer idP);
+    List<Tache> findAllByProjetIdAndDescriptionContainingIgnoreCase(Integer projetId, String description);
 }
