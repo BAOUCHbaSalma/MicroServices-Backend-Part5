@@ -36,19 +36,26 @@ public class TacheService {
         return tacheRepository.findById(id).orElseThrow();
     }
 
-    public Page<Tache> showTaches(Integer id, Integer size, Integer page , String sort,String description){
+    public Page<Tache> showTaches(Integer id, Integer size, Integer page, String sort, String description) {
+        // Determine the sort order
         Sort sortOrder = Sort.unsorted();
         if (sort != null && !sort.isEmpty()) {
             String[] sortParams = sort.split(",");
             sortOrder = Sort.by(Sort.Direction.fromString(sortParams[1]), sortParams[0]);
         }
-        if (description != null && !description.isEmpty()) {
-            return tacheRepository.findAllByProjetIdAndDescriptionContainingIgnoreCase(id, description);
-        }
-        Pageable pageable = PageRequest.of(page, size, sortOrder);
-        return  tacheRepository.findAllByProjetId(id,pageable);
 
+        // Create a Pageable object with the provided parameters
+        Pageable pageable = PageRequest.of(page, size, sortOrder);
+
+        // Check for description filter and return accordingly
+        if (description != null && !description.isEmpty()) {
+            return tacheRepository.findAllByProjetIdAndDescriptionContainingIgnoreCase(id, description, pageable);
+        }
+
+        // If no description filter, return all tasks for the project with pagination
+        return tacheRepository.findAllByProjetId(id, pageable);
     }
+
 
     public void deleteTache(Integer id){
         tacheRepository.deleteById(id);
@@ -72,5 +79,6 @@ public class TacheService {
 //        }
 //        return tacheRepository.findAllByProjetId(projetId);
 //    }
+
 
 }
