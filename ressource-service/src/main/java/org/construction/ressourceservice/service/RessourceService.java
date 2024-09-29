@@ -1,5 +1,6 @@
 package org.construction.ressourceservice.service;
 
+import org.construction.ressourceservice.classe.EStatus;
 import org.construction.ressourceservice.classe.Tache;
 import org.construction.ressourceservice.dto.AssociateDto;
 import org.construction.ressourceservice.model.Ressource;
@@ -63,5 +64,8 @@ public class RessourceService {
         Ressource ressource=findById(idr);
         ressource.setTacheId(idT);
         return ressourceRepository.save(ressource);
+    }
+    public List<Ressource> findByStatus(EStatus status) {
+        return ressourceRepository.findAllByStatus(status);
     }
 }

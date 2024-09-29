@@ -1,5 +1,6 @@
 package org.construction.ressourceservice.controller;
 
+import org.construction.ressourceservice.classe.EStatus;
 import org.construction.ressourceservice.dto.AssociateDto;
 import org.construction.ressourceservice.model.Ressource;
 import org.construction.ressourceservice.service.RessourceService;
@@ -51,6 +52,12 @@ public class RessourceController {
     public Ressource Associate(@PathVariable Integer idr, @RequestBody AssociateDto dto){
         return ressourceService.Associate(idr,dto.getIdTache());
     }
+
+    @GetMapping("ressources/status/{status}")
+    public List<Ressource> findRessourcesByStatus(@PathVariable EStatus status) {
+        return ressourceService.findByStatus(status);
+    }
+
 
 
 
