@@ -7,6 +7,7 @@ import org.construction.tacheservice.projet.ProjetRest;
 import org.construction.tacheservice.repository.TacheRepository;
 import org.construction.tacheservice.service.TacheService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +21,12 @@ public class TacheController {
     private TacheService tacheService;
 
     @GetMapping("/taches/{id}")
-    public List<Tache> showTaches(@PathVariable Integer id, @RequestParam(required = false) String description) {
-        return tacheService.showTachesWithFilter(id, description);
+
+    public Page<Tache> showTaches(@PathVariable Integer id, @RequestParam Integer size,
+                                  @RequestParam Integer page,
+                                  @RequestParam(required = false) String sort,@RequestParam(required = false) String description){
+        return tacheService.showTaches(id,size,page,sort,description);
+
     }
 //    @GetMapping("/taches/{id}")
 //    public List<Tache> showTaches(@PathVariable Integer id){

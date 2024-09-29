@@ -36,8 +36,6 @@ public class ProjetController {
             @RequestParam(required = false) Double maxBudget,
             @RequestParam(required = false) String startDate,
             @RequestParam(required = false) String endDate) {
-
-        // Passer les paramètres de filtre au service
         return projetService.showProjet(page, size, sort, name, minBudget, maxBudget, startDate, endDate);
     }
     @PostMapping("admin/projets")
