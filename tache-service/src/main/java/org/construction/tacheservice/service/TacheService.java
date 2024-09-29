@@ -7,6 +7,10 @@ import org.construction.tacheservice.model.Tache;
 import org.construction.tacheservice.projet.ProjetRest;
 import org.construction.tacheservice.repository.TacheRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -32,8 +36,14 @@ public class TacheService {
         return tacheRepository.findById(id).orElseThrow();
     }
 
-    public List<Tache> showTaches(Integer id){
-        return  tacheRepository.findAllByProjetId(id);
+    public Page<Tache> showTaches(Integer id, Integer size, Integer page , String sort){
+        Sort sortOrder = Sort.unsorted();
+        if (sort != null && !sort.isEmpty()) {
+            String[] sortParams = sort.split(",");
+            sortOrder = Sort.by(Sort.Direction.fromString(sortParams[1]), sortParams[0]);
+        }
+        Pageable pageable = PageRequest.of(page, size, sortOrder);
+        return  tacheRepository.findAllByProjetId(id,pageable);
 
     }
 
